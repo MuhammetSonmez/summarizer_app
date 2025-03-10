@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Text Summarizer</title>
+    <style>
+      :root {
+        --bg-color: #f8f4f0;
+        --primary-color: #5e4630;
+        --secondary-color: #a1866f;
+        --accent-color: #8b5e3c;
+        --button-color: #704214;
+        --button-text: #fff;
+        --input-bg: #f3ece7;
+        --border-radius: 8px;
+      }
+
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: var(--bg-color);
+        color: var(--primary-color);
+        max-width: 700px;
+        margin: 40px auto;
+        padding: 20px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        border-radius: var(--border-radius);
+      }
+
+      h1 {
+        text-align: center;
+        color: var(--accent-color);
+        margin-bottom: 24px;
+      }
+
+      label {
+        display: block;
+        margin: 12px 0 6px;
+        font-weight: bold;
+      }
+
+      textarea,
+      input[type="file"],
+      input[type="number"] {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 16px;
+        border: 1px solid var(--secondary-color);
+        border-radius: var(--border-radius);
+        background-color: var(--input-bg);
+        color: var(--primary-color);
+        box-sizing: border-box;
+        font-size: 1rem;
+      }
+
+      button {
+        display: inline-block;
+        width: 100%;
+        padding: 14px;
+        background-color: var(--button-color);
+        color: var(--button-text);
+        border: none;
+        border-radius: var(--border-radius);
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-top: 10px;
+      }
+
+      button:hover {
+        background-color: var(--accent-color);
+      }
+
+      .summary {
+        margin-top: 30px;
+        padding: 20px;
+        background-color: var(--input-bg);
+        border-left: 5px solid var(--accent-color);
+        border-radius: var(--border-radius);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      }
+
+      .summary h2 {
+        margin-top: 0;
+        color: var(--accent-color);
+      }
+
+      p {
+        margin: 0;
+        line-height: 1.6;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Text Summarizer</h1>
+    <form method="POST" enctype="multipart/form-data">
+      <label>Paste Text:</label>
+      <textarea name="text" placeholder="Paste your text here..."></textarea>
+
+      <label>OR upload a file (PDF, PNG, JPEG):</label>
+      <input type="file" name="file" accept=".pdf, .png, .jpg, .jpeg" />
+
+      <label for="num_sentences">Number of Sentences in Summary:</label>
+      <input type="number" name="num_sentences" value="1" min="1" max="10" />
+
+      <button type="submit">Summarize</button>
+    </form>
+
+    {% if summary %}
+    <div class="summary">
+      <h2>Summary:</h2>
+      <p>{{ summary }}</p>
+    </div>
+    {% endif %}
+  </body>
+</html>
